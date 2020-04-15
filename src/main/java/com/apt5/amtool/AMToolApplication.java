@@ -1,13 +1,13 @@
-package com.apt5.ppmtool;
+package com.apt5.amtool;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-public class PpmtoolApplication {
+public class AMToolApplication {
 
     public static void main(String[] args) {
-        SpringApplication.run(PpmtoolApplication.class, args);
+        SpringApplication.run(AMToolApplication.class, args);
     }
 
 }

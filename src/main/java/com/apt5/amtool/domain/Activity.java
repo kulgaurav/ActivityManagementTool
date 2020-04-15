@@ -1,4 +1,4 @@
-package com.apt5.ppmtool.domain;
+package com.apt5.amtool.domain;
 
 
 import com.fasterxml.jackson.annotation.JsonFormat;
@@ -9,35 +9,36 @@ import javax.validation.constraints.Size;
 import java.util.Date;
 
 @Entity
-public class Project {
+public class Activity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @NotBlank(message = "Project name is must!")
-    private String projectName;
+    @NotBlank(message = "Activity name is must!")
+    private String activityName;
 
-    @NotBlank(message = "Project identifier is must!")
-    @Size(min = 4, max = 5, message = "Please give 4 to 5 characters for project identifier.")
-    @Column(updatable = false, unique = true)
-    private String projectIdentifier;
+    @NotBlank(message = "Activity identifier is must!")
+    @Size(min = 4, max = 5, message = "Please give 4 to 5 characters for Activity identifier.")
+    @Column(updatable = false, unique = true) // This gets checked at DB layer, so can't really get caught in BindingResult errors.
+    private String activityIdentifier;
 
-
-    @NotBlank(message = "Project description is must")
+    @NotBlank(message = "Activity description is must")
     private String description;
 
     @JsonFormat(pattern = "yyyy-mm-dd")
     private Date startDate;
+
     @JsonFormat(pattern = "yyyy-mm-dd")
     private Date endDate;
 
     @JsonFormat(pattern = "yyyy-mm-dd")
     private Date createdAt;
+
     @JsonFormat(pattern = "yyyy-mm-dd")
     private Date updatedAt;
 
-    public Project() {
+    public Activity() {
     }
 
     @PrePersist
@@ -58,20 +59,20 @@ public class Project {
         this.id = id;
     }
 
-    public String getProjectName() {
-        return projectName;
+    public String getActivityName() {
+        return activityName;
     }
 
-    public void setProjectName(String projectName) {
-        this.projectName = projectName;
+    public void setActivityName(String activityName) {
+        this.activityName = activityName;
     }
 
-    public String getProjectIdentifier() {
-        return projectIdentifier;
+    public String getActivityIdentifier() {
+        return activityIdentifier;
     }
 
-    public void setProjectIdentifier(String projectIdentifier) {
-        this.projectIdentifier = projectIdentifier;
+    public void setActivityIdentifier(String activityIdentifier) {
+        this.activityIdentifier = activityIdentifier;
     }
 
     public String getDescription() {
