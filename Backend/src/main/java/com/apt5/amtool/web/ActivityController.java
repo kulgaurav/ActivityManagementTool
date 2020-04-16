@@ -8,10 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 
@@ -36,4 +33,23 @@ public class ActivityController {
         activityService.saveOrUpdateActivity(activity);
         return new ResponseEntity<Activity>(activity, HttpStatus.CREATED);
     }
+
+    @GetMapping("/{id}")
+    public ResponseEntity<?> getActivityById(@PathVariable String id){
+        Activity activity = activityService.findActivityByIdentifier(id);
+        return new ResponseEntity<Object>(activity, HttpStatus.OK);
+    }
+
+    @GetMapping("/all")
+    public Iterable<Activity> getAllActivities(){
+        return activityService.findAllActivities();
+    }
+
+    @DeleteMapping("/{id}")
+    public ResponseEntity<?> deleteActivity(@PathVariable String id){
+        activityService.deleteActivityById(id.toUpperCase());
+
+        return new ResponseEntity<String>("Project with id " + id + " successfully deleted", HttpStatus.OK);
+    }
+
 }
