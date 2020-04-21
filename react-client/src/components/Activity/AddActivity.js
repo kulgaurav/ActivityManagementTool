@@ -1,4 +1,7 @@
 import React, { Component } from "react";
+import PropTypes from "prop-types";
+import { connect } from "react-redux";
+import { createActivity } from "../../actions/activityAction";
 
 class AddActivity extends Component {
   constructor() {
@@ -16,6 +19,14 @@ class AddActivity extends Component {
     this.onSubmit = this.onSubmit.bind(this);
   }
 
+  componentWillReceiveProps(nextProps) {
+    if (nextProps.errors) {
+      this.setState({
+        errors: nextProps.errors,
+      });
+    }
+  }
+
   onChange(e) {
     this.setState({ [e.target.name]: e.target.value });
   }
@@ -31,12 +42,15 @@ class AddActivity extends Component {
       endDate: this.state.endDate,
     };
 
-    console.log(newActivityObject);
+    this.props.createActivity(newActivityObject, this.props.history);
   }
 
   render() {
+    const { errors } = this.state;
+
     return (
       <div>
+        <h1>{error}</h1>
         <div className="project">
           <div className="container">
             <div className="row">
@@ -109,4 +123,13 @@ class AddActivity extends Component {
   }
 }
 
-export default AddActivity;
+AddActivity.propTypes = {
+  createActivity: PropTypes.func.isRequired,
+  errors: PropTypes.object.isRequired,
+};
+
+const mapStateToProps = (state) => ({
+  errors: state.errors,
+});
+
+export default connect(null, { createActivity })(AddActivity);
