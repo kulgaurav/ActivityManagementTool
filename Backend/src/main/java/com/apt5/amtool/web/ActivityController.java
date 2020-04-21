@@ -14,6 +14,7 @@ import javax.validation.Valid;
 
 @RestController
 @RequestMapping("/api/activity")
+@CrossOrigin
 public class ActivityController {
 
     @Autowired
